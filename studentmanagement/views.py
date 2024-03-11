@@ -14,7 +14,16 @@ class StudentList(APIView):
         
         stuent_list=Student.objects.all()
         student_serilizer=StudentSerializer(stuent_list,many=True)
-        return Response(student_serilizer.data)
+        return Response(
+  
+        {
+            "status": 200,
+            "message": "Student List",
+            "data": student_serilizer.data,
+            
+        },
+        status=status.HTTP_200_OK,
+    )
     def post(self,request):
         try:
             Student.objects.create(name=request.data['name'],roll_number=str(request.data['roll_number']))
