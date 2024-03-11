@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+from common.configs.config import config as cfg
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "studentmanagement",
-    'rest_framework',
-    
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -79,15 +78,13 @@ WSGI_APPLICATION = "src.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "student_management",
-        "USER": "postgres",
-        "PASSWORD": "postgres",
-        "HOST": "localhost",
-        "PORT": 5432,
+        "NAME": cfg.get("postgres", "DB_NAME"),
+        "USER": cfg.get("postgres", "DB_USER"),
+        "PASSWORD": cfg.get("postgres", "DB_PASSWORD"),
+        "HOST": cfg.get("postgres", "DB_HOST"),
+        "PORT": cfg.get("postgres", "DB_PORT"),
     }
 }
-
-
 
 
 # Password validation
